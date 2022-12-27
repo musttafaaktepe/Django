@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'student_api',
+    'rest_framework', 
 ]
 
 MIDDLEWARE = [
