@@ -9,7 +9,7 @@ class Profile(models.Model):
     #cascade, setnull setDefault donothing protect
 
     def __str__(self):
-        return self.user
+        return self.user.username
 
 class Address(models.Model):
     name= models.CharField(max_length=20)
