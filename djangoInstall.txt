@@ -1,0 +1,66 @@
+python -m venv env   
+
+
+# Powershell    => .\env\Scripts\activate
+# bash          => source env/Scripts/Activate
+# linux/mac     => source env/bin/activate 
+
+
+pip install django      
+
+uyarı verirse :python.exe -m pip install --upgrade pip 
+pip freeze
+
+pip freeze > requirements.txt
+
+toptal sitesine django yazılarak çıkan dosya .gitignore oluşturularak yapıştırılır
+
+django-admin startproject main .
+
+python manage.py runserver
+
+python manage.py startapp fscohort
+
+setting.py ye gelerek 'fscohort' ınstaled_aps altına yazılır
+urls.py ye gelerek from django.urls import path, devamına include eklenir. ve path("", include("fscohort.urls")) eklenir
+fscohort dosyasına urls.py oluşturulur. maindeki urls copy paste yapılır. 
+
+python manage.py runserver
+python manage.py makemigrations
+python manage.py migrate
+python manage.py createsuperuser
+python manage.py shell
+	from fscohort.models import Student 		s1= Student.objects.all()			s1
+
+python manage.py shell
+python -m venv env
+   13  .active
+   17  source env/Scripts/Activate
+   18  pip freeze
+   19  pip install django
+   22  Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Unrestricted
+   23  python -m pip install --upgrade pip
+   24  pip freeze
+   25  django-admin startproject main
+   26  django-admin startproject main .
+   27  python manage.py runserver
+   28  python manage.py runserverpython -m venv env
+   13  .active
+   17  source env/Scripts/Activate
+   18  pip freeze
+   19  pip install django
+   22  Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Unrestricted
+   23  python -m pip install --upgrade pip
+   24  pip freeze
+   25  django-admin startproject main
+   26  django-admin startproject main .
+   27  python manage.py runserver
+   28  python manage.py runserver
+
+
+
+pip install python-decouple
+
+
+
+       
