@@ -70,6 +70,11 @@ s3=Student.objects.filter(number_lte=5)
 s4=Student.objects.filter(last_name__startswith='w')
 
 
+serializers
+pip install djangorestframework
+
+pip install -r requirements.txt
+pip install djangorestframework
 
 
 
