@@ -2,6 +2,9 @@ from django.shortcuts import render, HttpResponse, get_object_or_404
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.views import APIView
+
+
 from .models import Student, Path
 from .serializers import StudentSerializer, PathSerializer
 
@@ -57,7 +60,7 @@ def student_delete(request, pk):
     }
     return Response(message)
 
-#
+# func. based views
 
 @api_view(['GET', 'POST'])
 def student_api(request):
@@ -100,6 +103,53 @@ def student_api_get_update_delete(request, pk):
             return Response(data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     elif request.method == 'DELETE':
+        student.delete()
+        data = {
+            "message": f"Student {student.last_name} deleted successfully"
+        }
+        return Response(data)
+
+## class based views
+## api view
+
+class StudentListCreate(APIView):
+    def get(self, request):
+        students = Student.objects.all()
+        serializer = StudentSerializer(students, many=True)
+        return Response(serializer.data)
+    
+    def post(self, request):
+        serializer = StudentSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            data = {
+                "message": f"Student {serializer.validated_data.get('first_name')} saved successfully!"}
+            return Response(data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class StudentDetail(APIView):
+    
+    def get_obj(self, pk):
+        return get_object_or_404(Student, pk=pk)
+    
+    def get(self, request, pk):
+        student = self.get_obj(pk)
+        serializer = StudentSerializer(student)
+        return Response(serializer.data)
+    
+    def put(self, request, pk):
+        student = self.get_obj(pk)
+        serializer = StudentSerializer(student, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            data = {
+                "message": f"Student {student.last_name} updated successfully"
+            }
+            return Response(data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    def delete(self, request, pk):
+        student = self.get_obj(pk)
         student.delete()
         data = {
             "message": f"Student {student.last_name} deleted successfully"
