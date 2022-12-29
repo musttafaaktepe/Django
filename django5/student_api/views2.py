@@ -80,3 +80,5 @@ def path_api(request):
                 "message": f"Path saved successfully!"}
             return Response(data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
