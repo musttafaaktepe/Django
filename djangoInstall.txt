@@ -78,4 +78,15 @@ pip install djangorestframework
 
 
 
+django5
+python manage.py shell  ......>
+from student_api.models import Student
+s=Student.objects.get(number=1)
+s.path.path_n
+from student_api.models import Path
+p=Path.objects.filter(path_name__startswith='f')
+p.students.filter(first_name__startswith='m')
+
+
+
        
