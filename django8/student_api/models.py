@@ -11,7 +11,7 @@ class Student(models.Model):
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     number = models.IntegerField(blank=True, null=True)
-    age = models.IntegerField()
+    # age = models.IntegerField(null=True)
 
     def __str__(self):
         return f"{self.number}--{self.last_name} {self.first_name}"
