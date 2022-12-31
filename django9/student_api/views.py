@@ -9,57 +9,63 @@ from .models import Student, Path
 from .serializers import StudentSerializer, PathSerializer
 from rest_framework.generics import GenericAPIView, mixins, ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.viewsets import ModelViewSet
+from rest_framework.permissions import (
+    IsAuthenticated,
+    IsAdminUser,
+    IsAuthenticatedOrReadOnly,
+)
+
 
 @api_view() #default 'GET'
 def home(request):
     return Response({'home': 'This is home page...'})
 
-# @api_view(['GET'])
-# def students_list(request):
-#     students = Student.objects.all()
-#     print(students)
-#     serializer=StudentSerializer(students, many=True)
-#     # print(serializer)
-#     # print(serializer.data)
-#     return Response(serializer.data)
+@api_view(['GET'])
+def students_list(request):
+    students = Student.objects.all()
+    # print(students)
+    serializer=StudentSerializer(students, many=True)
+    # print(serializer)
+    # print(serializer.data)
+    return Response(serializer.data)
 
-# @api_view(['POST'])
-# def student_create(request):
-#     serializer=StudentSerializer(data=request.data)
-#     if serializer.is_valid():
-#         serializer.save()
-#         message={
-#             "message": f'Student updated Succesfully...'
-#         }
-#         return Response(message, status=status.HTTP_201_CREATED)
-#     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+@api_view(['POST'])
+def student_create(request):
+    serializer=StudentSerializer(data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        message={
+            "message": f'Student updated Succesfully...'
+        }
+        return Response(message, status=status.HTTP_201_CREATED)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-# @api_view(['GET'])
-# def student_detail(request, pk):
-#     student=get_object_or_404(Student, id=pk)
-#     serializer=StudentSerializer(student)
-#     return Response(serializer.data)
+@api_view(['GET'])
+def student_detail(request, pk):
+    student=get_object_or_404(Student, id=pk)
+    serializer=StudentSerializer(student)
+    return Response(serializer.data)
 
-# @api_view(['PUT'])
-# def student_update(request, pk):
-#     student = get_object_or_404(Student, id=pk)
-#     serializer = StudentSerializer(instance=student, data=request.data)
-#     if serializer.is_valid():
-#         serializer.save()
-#         message = {
-#             "message": f'Student updated succesfully....'
-#         }
-#         return Response(serializer.data)
-#     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+@api_view(['PUT'])
+def student_update(request, pk):
+    student = get_object_or_404(Student, id=pk)
+    serializer = StudentSerializer(instance=student, data=request.data)
+    if serializer.is_valid():
+        serializer.save()
+        message = {
+            "message": f'Student updated succesfully....'
+        }
+        return Response(serializer.data)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-# @api_view(['DELETE'])
-# def student_delete(request, pk):
-#     student = get_object_or_404(Student, id=pk)
-#     student.delete()
-#     message = {
-#         "message": 'Student deleted succesfully....'
-#     }
-#     return Response(message)
+@api_view(['DELETE'])
+def student_delete(request, pk):
+    student = get_object_or_404(Student, id=pk)
+    student.delete()
+    message = {
+        "message": 'Student deleted succesfully....'
+    }
+    return Response(message)
 
 # # func. based views
 
@@ -203,6 +209,7 @@ class StudentMVS(ModelViewSet):
     
     queryset = Student.objects.all()
     serializer_class = StudentSerializer
+    permission_classes=[IsAdminUser]
     pagination_class=CustomPageNumberPagination
     # pagination_class=CustomLimitOffsetPagination
     # pagination_class=CustomCursorPagination
