@@ -195,10 +195,13 @@ class StudentDetailCV(RetrieveUpdateDestroyAPIView):
     serializer_class = StudentSerializer
     
 #! ViewSets
+
+from .pagination import *
 class StudentMVS(ModelViewSet):
     
     queryset = Student.objects.all()
     serializer_class = StudentSerializer
+    pagination_class=CustomPageNumberPagination
     
     @action(detail=False, methods=["GET"])
     def student_count(self, request):
