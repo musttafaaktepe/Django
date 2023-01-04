@@ -156,8 +156,8 @@ LOGGING = {
     "handlers": { 
         "console": { 
             "class": "logging.StreamHandler", 
-            "formatter": "standard", 
-            "level": "INFO", 
+            "formatter": "standard", #'simple',
+            "level": "INFO", # 'ERROR',
             "stream": "ext://sys.stdout", 
             }, 
         'file': { 
