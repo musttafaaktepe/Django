@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'blog',
     'rest_framework',
     'django_filters',
-    'user'
+    'user',
+    'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [
