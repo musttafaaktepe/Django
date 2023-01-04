@@ -88,6 +88,7 @@ p=Path.objects.filter(path_name__startswith='f')
 p.students.filter(first_name__startswith='m')
 
 
- pip install Faker  
+pip install Faker 
+pip install django-filter 
 
        
