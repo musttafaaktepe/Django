@@ -91,4 +91,4 @@ p.students.filter(first_name__startswith='m')
 pip install Faker 
 pip install django-filter 
 
-       
+       pip install dj-rest-auth
