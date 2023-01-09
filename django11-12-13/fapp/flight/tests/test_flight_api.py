@@ -83,8 +83,8 @@ class FlightTestCase(APITestCase):
             "operation_airlines": "THY",
             "departure_city": "Adana",
             "arrival_city": "Ankara",
-            "date_of_departure": "2022-01-08",
-            "etd": "16:35:00",
+            "date_of_departure": "2022-01-09",
+            "etd": "17:35:00",
         }
         print(self.flight.id)
 
