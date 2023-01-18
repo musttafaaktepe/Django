@@ -28,7 +28,7 @@ services:
       - ./frontend:/frontend
 
   db:
-    image: postgres:14.0-alpine
+    image: postgres:13-alpine
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=12345
