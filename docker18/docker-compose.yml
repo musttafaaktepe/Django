@@ -9,7 +9,11 @@ services:
       - 8000:8000
     restart: on-failure # when restart
     volumes: # external:internal volumes
-      - ./backend/db.sqlite3:/backend/db.sqlite3
+      # - ./backend/db.sqlite3:/backend/db.sqlite3
+      - ./backend:/backend
+    depends_on:
+      - db
+
 
   frontend:
     # container_name: frontend
@@ -22,3 +26,16 @@ services:
       - backend # first run backend.
     volumes:
       - ./frontend:/frontend
+
+  db:
+    image: postgres:14.0-alpine
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=12345
+      - POSTGRES_DB=docker_django
+    
+    volumes:
+      - pg_data:/var/lib/postgresql/data/
+    
+volumes:
+  pg_data:
