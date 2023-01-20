@@ -14,7 +14,8 @@ class ReviewInline(admin.TabularInline):
 
 class ProductAdmin(admin.ModelAdmin):
     list_display = ("name", "create_date", "is_in_stock",
-                    "added_days_ago", "update_date")
+                    "added_days_ago", "update_date", )
+                    # "how_many_reviews")
     list_editable = ("is_in_stock", )
     # list_display_links = ("create_date", ) #can't add items in list_editable to here
     ordering = ("name",)
@@ -55,6 +56,8 @@ class ReviewAdmin(admin.ModelAdmin):
     list_display = ('__str__', 'created_date', 'is_released')
     list_per_page = 50
     raw_id_fields = ('product',)
+
+
 
 
 admin.site.register(Product, ProductAdmin)
