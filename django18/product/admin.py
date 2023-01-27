@@ -3,6 +3,12 @@ from .models import Product, Review, Category
 from django.utils import timezone
 from django.utils.safestring import mark_safe
 
+
+from django_admin_listfilter_dropdown.filters import RelatedDropdownFilter, DropdownFilter
+# from rangefilter.filters import DateRangeFilter, DateTimeRangeFilter
+# from .resources import ReviewResource
+# from import_export.admin import ImportExportModelAdmin
+
 class ReviewInline(admin.TabularInline):
     '''Tabular Inline View for '''
     model = Review
@@ -71,8 +77,12 @@ class ProductAdmin(admin.ModelAdmin):
 class ReviewAdmin(admin.ModelAdmin):
     list_display = ('__str__', 'created_date', 'is_released')
     list_per_page = 50
-    raw_id_fields = ('product',)
-
+    raw_id_fields = ('product',) 
+    # list_filter = ("product",)
+    list_filter = (
+         ('product', RelatedDropdownFilter),
+    )
+    # resource_class = ReviewResource
 
 
 

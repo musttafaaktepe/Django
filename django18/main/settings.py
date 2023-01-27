@@ -38,6 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'product',
+    'django_admin_listfilter_dropdown',
+    # 'rangefilter',
+    # 'import_export',
+    # 'ckeditor', 
 ]
 
 MIDDLEWARE = [
