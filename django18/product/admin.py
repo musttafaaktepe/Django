@@ -51,6 +51,22 @@ class ProductAdmin(admin.ModelAdmin):
         fark = timezone.now() - product.create_date
         return fark.days
 
+    def how_many_reviews(self, obj):
+        count = obj.reviews.count()
+        return count
+    
+    # def bring_image(self, obj):
+    #     if obj.product_img:
+    #         return mark_safe(f"<img src={obj.product_img.url} width=400 height=400></img>")
+    #     return mark_safe(f"<h3>{obj.name} has not image </h3>")
+    
+    # def bring_img_to_list(self, obj):
+    #     if obj.product_img:
+    #         return mark_safe(f"<img src={obj.product_img.url} width=50 height=50></img>")
+    #     return mark_safe("******")
+    
+    # bring_img_to_list.short_description = "product_image"
+
 
 class ReviewAdmin(admin.ModelAdmin):
     list_display = ('__str__', 'created_date', 'is_released')

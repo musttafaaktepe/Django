@@ -1,4 +1,4 @@
-from products.models import  Product
+from product.models import  Product
 from faker import Faker
 
 def run1():
@@ -26,7 +26,7 @@ def run2():
         exit()
         # https://faker.readthedocs.io/en/master/
     '''
-    from products.models import Review
+    from product.models import Review
     faker = Faker()
 
     for product in Product.objects.iterator():
