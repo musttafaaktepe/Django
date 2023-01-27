@@ -14,7 +14,7 @@ class ReviewInline(admin.TabularInline):
 
 class ProductAdmin(admin.ModelAdmin):
     list_display = ("name", "create_date", "is_in_stock",
-                    "added_days_ago", "update_date", )
+                    "added_days_ago", "update_date", "bring_img_to_list" )
                     # "how_many_reviews")
     list_editable = ("is_in_stock", )
     # list_display_links = ("create_date", ) #can't add items in list_editable to here
