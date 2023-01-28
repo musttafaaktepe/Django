@@ -24,6 +24,8 @@ class CarSerializer(serializers.ModelSerializer):
         return fields
 
 class ReservationSerializer(serializers.ModelSerializer):
+
+    total_price = serializers.SerializerMethodField()
     class Meta:
         model = Reservation
         fields = (
@@ -31,12 +33,15 @@ class ReservationSerializer(serializers.ModelSerializer):
             'customer',
             'car',
             'start_date',
-            'end_date'
+            'end_date',
+            'total_price'
         )
-        # validators = [
-        #     serializers.UniqueTogetherValidator(
-        #         queryset=Reservation.objects.all(),
-        #         fields=('customer', 'start_date', 'end_date'),
-        #         message=('You alreday have a reservation between these dates...')
-            # )
-        # ]
+        validators = [
+            serializers.UniqueTogetherValidator(
+                queryset=Reservation.objects.all(),
+                fields=('customer', 'start_date', 'end_date'),
+                message=('You alreday have a reservation between these dates...')
+            )
+        ]
+    def get_total_price(self, obj):
+        return obj.car.rent_per_day * (obj.end_date - obj.start_date).days
