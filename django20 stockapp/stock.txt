@@ -1,4 +1,0 @@
-https://console-13581.fullstack.clarusway.com/
-https://13581.fullstack.clarusway.com/redoc/
-https://13581.fullstack.clarusway.com/swagger/
-https://stock.fullstack.clarusway.com/stock/
