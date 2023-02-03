@@ -40,12 +40,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'stock',
+    'django_filters',
     
 
 
     
     # my_apps
     'account',
+    
     
     # drf
     'rest_framework',
@@ -145,6 +147,6 @@ REST_AUTH_SERIALIZERS = {
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.TokenAuthentication'
+        'rest_framework.authentication.TokenAuthentication',
     ]
 }
