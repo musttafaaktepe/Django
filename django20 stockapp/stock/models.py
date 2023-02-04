@@ -38,6 +38,7 @@ class Purchases(UpdateCreate):
     price_total = models.DecimalField(max_digits=8, decimal_places=2, blank=True)
     def __str__(self):
         return f'{self.product} - {self.quantity}'
+        
 class Sales(UpdateCreate):
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     brand = models.ForeignKey(Brand, on_delete=models.SET_NULL, null=True, related_name='b_sales')
