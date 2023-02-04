@@ -17,7 +17,10 @@ class ProductSerializer(serializers.ModelSerializer):
 
     category=serializers.StringRelatedField()
     brand = serializers.StringRelatedField()
-
+    category_id = serializers.IntegerField()
+    brand_id = serializers.IntegerField()
+    
+    
     class Meta:
         model = Product
         fields = (
@@ -66,14 +69,17 @@ class FirmSerializer(serializers.ModelSerializer):
         )
 
 class PurchasesSerializer(serializers.ModelSerializer):
-
-    user = serializers.StringRelatedField()
+    
+    user = serializers.StringRelatedField() 
     firm = serializers.StringRelatedField()
     brand = serializers.StringRelatedField()
     product = serializers.StringRelatedField()
-
+    product_id = serializers.IntegerField()
+    brand_id = serializers.IntegerField()
+    firm_id = serializers.IntegerField()
+    
     class Meta:
-        models = Purchases
+        model = Purchases
         fields = (
             "id",
             "user",
@@ -88,8 +94,9 @@ class PurchasesSerializer(serializers.ModelSerializer):
             "price",
             "price_total",
             "createds",
-            "updates",
-            
+            "updated",
         )
+        
+    
 
 
