@@ -83,13 +83,11 @@ class PurchaseView(viewsets.ModelViewSet):
         serializer = self.get_serializer(instance, data=request.data, partial=partial)
         serializer.is_valid(raise_exception=True)
         #! #############  UPDATE Product Stock ############
-
-        puchase = request.data
-        product = Product.objects.get(id=instance.pruduct_id)
-
-        
-
-
+        purchase = request.data
+        product = Product.objects.get(id=instance.product_id)
+        sonuc = purchase['quantity'] - instance.quantity
+        product.stock += sonuc
+        product.save()
         #! #############################################
         self.perform_update(serializer)
         if getattr(instance, '_prefetched_objects_cache', None):
@@ -97,3 +95,11 @@ class PurchaseView(viewsets.ModelViewSet):
             # forcibly invalidate the prefetch cache on the instance.
             instance._prefetched_objects_cache = {}
         return Response(serializer.data)
+    
+    def destroy(self, request, *args, **kwargs):
+        instance = self.get_object()
+        product = Product.objects.get(id=instance.product_id)
+        product.stock -= instance.quantity
+        product.save()
+        self.perform_destroy(instance)
+        return Response(status=status.HTTP_204_NO_CONTENT)

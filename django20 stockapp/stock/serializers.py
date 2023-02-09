@@ -77,13 +77,16 @@ class PurchasesSerializer(serializers.ModelSerializer):
     product_id = serializers.IntegerField()
     brand_id = serializers.IntegerField()
     firm_id = serializers.IntegerField()
-    
+    category = serializers.SerializerMethodField()
+    tiime_hour
+
     class Meta:
         model = Purchases
         fields = (
             "id",
             "user",
             "user_id",
+            "category",
             "firm",
             "firm_id",
             "brand",
@@ -93,10 +96,19 @@ class PurchasesSerializer(serializers.ModelSerializer):
             "quantity",
             "price",
             "price_total",
-            "createds",
+            # "createds",
+            "time_hour",?????????
             "updated",
         )
-        
     
+    # def get_category(self, obj):
+    #     product = Product.objects.get(id=obj.product_id)
+    #     return Category.objects.get(id=product.category_id).name
+    
+    def get_category(self, obj):
+        return obj.product.category.name
+    
+    def tiime_hour(self, obj):
+        return datetime.datetime.strftime(obj.createds, "%H:%M")
 
 
