@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import Category, Brand, Product, Firm, Purchases, Sales
-
+import datetime
 
 class CategorySerializer(serializers.ModelSerializer):
     product_count = serializers.SerializerMethodField()  # read_only
@@ -78,7 +78,8 @@ class PurchasesSerializer(serializers.ModelSerializer):
     brand_id = serializers.IntegerField()
     firm_id = serializers.IntegerField()
     category = serializers.SerializerMethodField()
-    tiime_hour
+    time_hour = serializers.SerializerMethodField()
+    createds = serializers.SerializerMethodField()
 
     class Meta:
         model = Purchases
@@ -97,8 +98,8 @@ class PurchasesSerializer(serializers.ModelSerializer):
             "price",
             "price_total",
             # "createds",
-            "time_hour",?????????
-            "updated",
+            "time_hour",
+            "createds",
         )
     
     # def get_category(self, obj):
@@ -108,7 +109,10 @@ class PurchasesSerializer(serializers.ModelSerializer):
     def get_category(self, obj):
         return obj.product.category.name
     
-    def tiime_hour(self, obj):
+    def get_time_hour(self, obj):
         return datetime.datetime.strftime(obj.createds, "%H:%M")
-
+    
+    def get_createds(self, obj):
+        return datetime.datetime.strftime(obj.createds, "%d,%m,%Y")
+    
 
