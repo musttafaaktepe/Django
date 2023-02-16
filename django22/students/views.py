@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-
+from .models import Student
 
 def home(request):
 
@@ -31,3 +31,11 @@ def home(request):
 {% command %}
 | ---> filter
 '''
+def student_list(request):
+    students = Student.objects.all()
+    context = {
+        'students': students
+    }
+
+    return render(request, 'students/student_list.html', context)
+

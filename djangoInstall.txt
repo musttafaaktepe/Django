@@ -92,3 +92,5 @@ pip install Faker
 pip install django-filter 
 
        pip install dj-rest-auth
+
+pip install Pillow
