@@ -1,6 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
+
 from .models import Student
+from .forms import StudentForm
 
 def home(request):
 
@@ -38,4 +40,23 @@ def student_list(request):
     }
 
     return render(request, 'students/student_list.html', context)
+
+def student_add(request):
+    form = StudentForm()
+    if request.method == 'POST':
+        # print('POST :', request.POST)
+        # print('fıles :', request.FILES)
+        form = StudentForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            form.save()
+            return redirect('student_list')
+
+    context = {
+        'form': form
+    }
+
+    return render(request, 'students/student_add.html', context)
+
+
 
